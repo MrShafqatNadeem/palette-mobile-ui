@@ -60,9 +60,6 @@ class _ShippingRegistrationScreenState
             fontWeight: FontWeight.w700,
             fontFamily: "Noto Sans KR",
           ),
-
-
-
         ),
         centerTitle: true,
         elevation: 1.5,
