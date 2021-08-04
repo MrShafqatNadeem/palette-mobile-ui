@@ -76,8 +76,8 @@ class _ContentRegistrationScreenState extends State<ContentRegistrationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      width: 37.sp,
-                      height: 20.sp,
+                      width: MediaQuery.of(context).size.width*0.1,
+                      height:MediaQuery.of(context).size.height*0.03,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
                         border: Border.all(
@@ -96,8 +96,8 @@ class _ContentRegistrationScreenState extends State<ContentRegistrationScreen> {
                       )),
                   SizedBox(width: 8.sp),
                   Container(
-                    width: 37.sp,
-                    height: 20.sp,
+                    width: MediaQuery.of(context).size.width*0.1,
+                    height:MediaQuery.of(context).size.height*0.03,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(3),
                       border: Border.all(
@@ -144,7 +144,7 @@ class _ContentRegistrationScreenState extends State<ContentRegistrationScreen> {
               ),
               Divider(
                 height: 49.sp,
-                thickness: 2.sp,
+                thickness: 1.sp,
               ),
               Text(
                 "검색 키워드",
@@ -200,7 +200,7 @@ class _ContentRegistrationScreenState extends State<ContentRegistrationScreen> {
               ),
               Divider(
                 height: 56.sp,
-                thickness: 2,
+                thickness: 1,
               ),
 
 
@@ -330,7 +330,7 @@ class _ContentRegistrationScreenState extends State<ContentRegistrationScreen> {
                 ),
               ),
               SizedBox(
-                height: 5.sp,
+                height: 16.sp,
               ),
             ],
           ),

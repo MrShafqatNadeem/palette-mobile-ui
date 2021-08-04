@@ -224,7 +224,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ),
                   Divider(
-                    thickness: 2,
+                    thickness: 1,
                     color: Color(0xffE1E1E1),
                   ),
                   RichText(
@@ -378,7 +378,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ),
                   Divider(
-                    thickness: 2,
+                    thickness: 1,
                     color: Color(0xffE1E1E1),
                   ),
                   RichText(
@@ -532,7 +532,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ),
                   Divider(
-                    thickness: 2,
+                    thickness: 1,
                     color: Color(0xffE1E1E1),
                   )
                 ],

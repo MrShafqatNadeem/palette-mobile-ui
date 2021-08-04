@@ -18,81 +18,83 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   showAlertDialog(BuildContext context) {
     AlertDialog alert = AlertDialog(
-      content: Container(
-        height: 20,
-        child: Center(
-          child: Text(
-            "탈퇴 하시겠습니까?",
-            style: TextStyle(
-                color: Color(0xff666666),
-                fontSize: 15,
-                fontFamily: " Noto Sans KR",
-                fontWeight: FontWeight.w300),
-          ),
-        ),
-      ),
-      actionsPadding: EdgeInsets.only( right: 50 , bottom: 20),
-      actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
           children: [
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Center(
-                child: Container(
-                  width: 80,
-                  height: 35,
-                  decoration: BoxDecoration(
-                      color: Color(0xffEB9FA3),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Center(
-                    child: Text(
-                      "취소",
-                      style:  TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontFamily: " Noto Sans KR",
-                          fontWeight: FontWeight.w300)
-                    ),
-                  ),
-                ),
+            Center(
+              child: Text(
+                "탈퇴 하시겠습니까?",
+                style: TextStyle(
+                    color: Color(0xff666666),
+                    fontSize: 15,
+                    fontFamily: " Noto Sans KR",
+                    fontWeight: FontWeight.w300),
               ),
             ),
             SizedBox(
-              width: 10,
+              height: 15,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return LoginScreen();
-                    }));
-              },
-              child: Center(
-                child: Container(
-                  width: 80,
-                  height: 35,
-                  decoration: BoxDecoration(
-                      color: Color(0xffAAAAAA),
-                      borderRadius: BorderRadius.circular(5)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Center(
-                    child: Text(
-                      "탈퇴",
-                      style:  TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontFamily: " Noto Sans KR",
-                          fontWeight: FontWeight.w300)
+                    child: Container(
+                      width: 80,
+                      height: 35,
+                      decoration: BoxDecoration(
+                          color: Color(0xffEB9FA3),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Center(
+                        child: Text(
+                            "취소",
+                            style:  TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontFamily: " Noto Sans KR",
+                                fontWeight: FontWeight.w300)
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
+                SizedBox(
+                  width: 15,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return LoginScreen();
+                        }));
+                  },
+                  child: Center(
+                    child: Container(
+                      width: 80,
+                      height: 35,
+                      decoration: BoxDecoration(
+                          color: Color(0xffAAAAAA),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Center(
+                        child: Text(
+                            "탈퇴",
+                            style:  TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontFamily: " Noto Sans KR",
+                                fontWeight: FontWeight.w300)
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
-        )
-      ],
+        ),
     );
 
     // show the dialog

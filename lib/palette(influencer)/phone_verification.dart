@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:palette/palette(influencer)/signup_screen.dart';
+import 'package:palette/widgets/floatingbutton.dart';
 class PhoneVerification extends StatefulWidget {
   @override
   _PhoneVerificationState createState() => _PhoneVerificationState();
@@ -68,31 +69,47 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                   fontFamily: "Noto Sans KR"),
             ),
             Expanded(child: Container()),
-            InkWell(
-              onTap: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return SignupScreen();
-                    }));
-              },
-              child: Container(
-                height: 52.sp,
-                decoration: BoxDecoration(
-                    color: Color(0xffEA9FA3),
-                    borderRadius: BorderRadius.all(Radius.circular(3))),
-                child: Center(
-                    child: Text("인증 하기",
-                        style: TextStyle(
-                            fontSize: 15.sp,
-                            color: Color(0xffFFFFFF),
-                            fontWeight: FontWeight.w500,
-                            fontFamily: "Noto Sans KR"))),
-              ),
-            ),
+
+
+            // InkWell(
+            //   onTap: (){
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) {
+            //           return SignupScreen();
+            //         }));
+            //   },
+            //   child: Container(
+            //     height: 52.sp,
+            //     margin: EdgeInsets.only(bottom: 25.sp),
+            //     decoration: BoxDecoration(
+            //         color: Color(0xffEA9FA3),
+            //         borderRadius: BorderRadius.all(Radius.circular(3))),
+            //     child: Center(
+            //         child: Text("인증 하기",
+            //             style: TextStyle(
+            //                 fontSize: 15.sp,
+            //                 color: Color(0xffFFFFFF),
+            //                 fontWeight: FontWeight.w500,
+            //                 fontFamily: "Noto Sans KR"))),
+            //   ),
+            // ),
           ],
         ),
       ),
 
+        floatingActionButton: InkWell(
+          onTap: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) {
+                  return SignupScreen();
+                }));
+          },
+          child: FloatingButton(text: "인증 하기",)
+        ),
+
+
+    floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+
   }
 }

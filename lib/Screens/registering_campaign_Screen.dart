@@ -1,13 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:palette/widgets/bottom_Bar.dart';
 import 'package:simple_tooltip/simple_tooltip.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
 import 'load_campaign_Screen.dart';
+import 'package:textfield_tags/textfield_tags.dart';
+import 'package:intl/intl.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegisteringcampaignScreen extends StatefulWidget {
+  bool change = false;
+
+  RegisteringcampaignScreen({this.change});
+
   @override
   _RegisteringcampaignScreenState createState() =>
       _RegisteringcampaignScreenState();
@@ -16,16 +24,14 @@ class RegisteringcampaignScreen extends StatefulWidget {
 class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
   String titleValidate = '';
   String desValidate = '';
-  String periodValidate = '';
   String recruitmentValidate = '';
   String amountValidate = '';
+
   bool informationValidate = false;
   bool detailsValidate = false;
   bool missionValidate = false;
   bool keywordValidate = false;
   bool historyValidate = false;
-  bool hastagValidate = false;
-  bool persontagValidate = false;
   bool text1alert = false;
   bool text2alert = false;
   bool changebtn1 = false;
@@ -37,9 +43,72 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
   bool showbtn3data = false;
   bool showbtn4data = false;
   bool imagepic1 = false;
-
+  bool changeboder1 = false;
+  bool changeboder2 = false;
+  bool changeboder3 = false;
+  bool changeboder4 = false;
+  List<String> blogTags = [];
+  List<String> blogTags2 = [];
+  List<String> intagramTags = [];
+  List<String> intagramTags2 = [];
   File _image;
   File _image2;
+  DateTime _dateTime = DateTime.now();
+  DateTime _dateTime1 = DateTime.now();
+  var myFormat = DateFormat('yyyy-MM-dd');
+  var maskFormatter = new MaskTextInputFormatter(mask: '#,###,###,###');
+  String message = "";
+  TextEditingController controller;
+  TextEditingController controller1;
+
+  showAlertDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            message,
+            style: TextStyle(
+                color: Color(0xff666666),
+                fontSize: 14,
+                fontFamily: " Noto Sans KR",
+                fontWeight: FontWeight.w300),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Center(
+              child: Container(
+                width: 70,
+                height: 30,
+                decoration: BoxDecoration(
+                    color: Color(0xffEB9FA3),
+                    borderRadius: BorderRadius.circular(5)),
+                child: Center(
+                  child: Text(
+                    "Ok",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   Future getImage() async {
     try {
@@ -69,11 +138,17 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
       setState(() {});
     }
   }
+
   FocusNode title;
   FocusNode des;
-  FocusNode period;
   FocusNode recruitment;
   FocusNode amount;
+  FocusNode date;
+  FocusNode buttononedata;
+  FocusNode button3data1;
+  FocusNode button3data2;
+  FocusNode button4data1;
+  FocusNode button4data2;
 
   @override
   void initState() {
@@ -81,9 +156,22 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
     super.initState();
     title = FocusNode();
     des = FocusNode();
-    period = FocusNode();
     recruitment = FocusNode();
     amount = FocusNode();
+    date = FocusNode();
+    buttononedata = FocusNode();
+    button3data1 = FocusNode();
+    button3data2 = FocusNode();
+    button4data1 = FocusNode();
+    button4data2 = FocusNode();
+    controller = TextEditingController();
+    controller.addListener(() {
+      setState(() {});
+    });
+    controller1 = TextEditingController();
+    controller1.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -92,7 +180,7 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
       appBar: AppBar(
         leading: Container(),
         title: Text(
-          "캠페인 등록하기",
+          widget.change ? "캠페인 수정하기" : "캠페인 등록하기",
           style: TextStyle(
             color: Color(0xff333333),
             fontWeight: FontWeight.bold,
@@ -132,29 +220,34 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return LoadCompaignScreen();
-                    }));
-                  },
-                  child: Text(
-                    "캠페인 내용 불러오기",
-                    style: TextStyle(
-                      color: Color(0xff888888),
-                      fontWeight: FontWeight.w300,
-                      fontSize: 13,
-                      fontFamily: "Noto Sans KR",
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 1,
-                      decorationColor: Color(0xff888888),
-                    ),
-                    textAlign: TextAlign.end,
-                  ),
-                ),
-              ),
+                  width: MediaQuery.of(context).size.width,
+                  child: widget.change
+                      ? Center()
+                      : InkWell(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return LoadCompaignScreen(
+                                title: titleValidate,
+                                subtitle: desValidate,
+                                recnumber: recruitmentValidate,
+                              );
+                            }));
+                          },
+                          child: Text(
+                            "캠페인 내용 불러오기",
+                            style: TextStyle(
+                              color: Color(0xff888888),
+                              fontWeight: FontWeight.w300,
+                              fontSize: 13,
+                              fontFamily: "Noto Sans KR",
+                              decoration: TextDecoration.underline,
+                              decorationThickness: 1,
+                              decorationColor: Color(0xff888888),
+                            ),
+                            textAlign: TextAlign.end,
+                          ),
+                        )),
               SizedBox(
                 height: 10,
               ),
@@ -244,7 +337,7 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
               Row(
                 children: [
                   Text(
-                    "캠페인 제목",
+                    "신청 기간",
                     style: TextStyle(
                         fontSize: 15,
                         color: Color(0xff333333),
@@ -292,7 +385,7 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                               fontFamily: "Noto Sans KR"),
                         ),
                         Divider(
-                          thickness: 1.5,
+                          thickness: 1,
                           color: Color(0xffE1E1E1),
                         ),
                         Text(
@@ -309,36 +402,115 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                   ),
                 ],
               ),
-              Theme(
-                data: new ThemeData(
-                  primaryColor: Color(0xffEA9FA3),
-                  primaryColorDark: Color(0xffDDDDDD),
-                ),
-                child: Container(
-                  margin: EdgeInsets.only(top: 5),
-                  height: 50,
-                  child: TextFormField(
-                    focusNode: period,
-                    onChanged: (v) {
-                      periodValidate = v;
-                    },
-                    decoration: new InputDecoration(
-                      hintText: "제목을 입력해주세요.",
-                      //   fillColor: Colors.white,
-                      hintStyle: TextStyle(
-                          color: Color(0xffAAAAAA),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
-                          fontFamily: "Noto Sans KR"),
-                      border: new OutlineInputBorder(),
-                      enabledBorder: new OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 0.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Theme(
+                    data: new ThemeData(
+                      primaryColor: Color(0xffEA9FA3),
+                      primaryColorDark: Color(0xffDDDDDD),
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.only(top: 5),
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: TextFormField(
+                        controller: controller,
+                        focusNode: date,
+                        readOnly: true,
+                        onTap: () async {
+                          final DateTime picked = await showDatePicker(
+                            context: context,
+                            initialDate: _dateTime,
+                            firstDate: DateTime(2010),
+                            lastDate: DateTime(2024),
+                            initialDatePickerMode: DatePickerMode.day,
+                            //locale : const Locale('kr')
+                          );
+                          if (picked != null && picked != _dateTime)
+                            setState(() {
+                              _dateTime = picked;
+                              debugPrint("_selectDate");
+                              debugPrint(_dateTime.toString());
+                              controller.text = myFormat.format(_dateTime);
+                            });
+                        },
+                        decoration: new InputDecoration(
+                          //   fillColor: Colors.white,
+                          hintText: myFormat.format(_dateTime),
+                          hintStyle: TextStyle(
+                              color: Color(0xffAAAAAA),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w300,
+                              fontFamily: "Noto Sans KR"),
+                          border: new OutlineInputBorder(),
+                          enabledBorder: new OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.grey, width: 0.0),
+                          ),
+                          //fillColor: Colors.green
+                        ),
                       ),
-                      //fillColor: Colors.green
                     ),
                   ),
-                ),
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        "~",
+                        style:
+                            TextStyle(color: Color(0xffDDDDDD), fontSize: 25),
+                      ),
+                    ),
+                  ),
+                  Theme(
+                    data: new ThemeData(
+                      primaryColor: Color(0xffEA9FA3),
+                      primaryColorDark: Color(0xffDDDDDD),
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.only(top: 5),
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: TextFormField(
+                        controller: controller1,
+                        focusNode: date,
+                        readOnly: true,
+                        onTap: () async {
+                          final DateTime picked = await showDatePicker(
+                            context: context,
+                            initialDate: _dateTime1,
+                            firstDate: DateTime(2010, 8),
+                            lastDate: DateTime(2101),
+                            initialDatePickerMode: DatePickerMode.day,
+                            //locale : const Locale('kr')
+                          );
+                          if (picked != null && picked != _dateTime1)
+                            setState(() {
+                              _dateTime1 = picked;
+                              debugPrint("_selectDate");
+                              debugPrint(_dateTime1.toString());
+                              controller1.text = myFormat.format(_dateTime1);
+                            });
+                        },
+                        decoration: new InputDecoration(
+                          //   fillColor: Colors.white,
+                          hintText: myFormat.format(_dateTime1),
+                          hintStyle: TextStyle(
+                              color: Color(0xffAAAAAA),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w300,
+                              fontFamily: "Noto Sans KR"),
+                          border: new OutlineInputBorder(),
+                          enabledBorder: new OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.grey, width: 0.0),
+                          ),
+                          //fillColor: Colors.green
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 30,
@@ -392,7 +564,7 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                               fontFamily: "Noto Sans KR"),
                         ),
                         Divider(
-                          thickness: 1.5,
+                          thickness: 1,
                           color: Color(0xffE1E1E1),
                         ),
                         Text(
@@ -418,6 +590,7 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                   margin: EdgeInsets.only(top: 5),
                   height: 50,
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     focusNode: recruitment,
                     onChanged: (v) {
                       recruitmentValidate = v;
@@ -460,9 +633,16 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                   margin: EdgeInsets.only(top: 5),
                   height: 50,
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [ThousandsSeparatorInputFormatter()],
                     focusNode: amount,
                     onChanged: (v) {
                       amountValidate = v;
+                      var formatter = NumberFormat('#,###,000');
+                      amountValidate =
+                          formatter.format(int.parse(amountValidate));
+                      print(amountValidate);
+                      print("done");
                     },
                     decoration: new InputDecoration(
                       hintText: "제공금액을 입력하세요.",
@@ -589,46 +769,10 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                             primaryColorDark: Color(0xffDDDDDD),
                           ),
                           child: Container(
-                            margin: EdgeInsets.only(top: 5),
-                            height: 50,
-                            child: TextFormField(
-                              onChanged: (v) {
-                                if (v.length == 0) {
-                                  setState(() {
-                                    informationValidate = false;
-                                  });
-                                } else {
-                                  setState(() {});
-                                  informationValidate = true;
-                                }
-                              },
-                              decoration: new InputDecoration(
-                                hintText: "주소를 검색해주세요.",
-                                //   fillColor: Colors.white,
-                                hintStyle: TextStyle(
-                                    color: Color(0xffAAAAAA),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300,
-                                    fontFamily: "Noto Sans KR"),
-                                border: new OutlineInputBorder(),
-                                enabledBorder: new OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.grey, width: 0.0),
-                                ),
-                                //fillColor: Colors.green
-                              ),
-                            ),
-                          ),
-                        ),
-                        Theme(
-                          data: new ThemeData(
-                            primaryColor: Color(0xffEA9FA3),
-                            primaryColorDark: Color(0xffDDDDDD),
-                          ),
-                          child: Container(
                             margin: EdgeInsets.only(top: 10),
                             height: 150,
                             child: TextFormField(
+                              focusNode: buttononedata,
                               onChanged: (v) {
                                 if (v.length == 0) {
                                   setState(() {
@@ -682,8 +826,8 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                       setState(() {
                         changebtn3 = true;
                         showbtn3data = true;
-                        showbtn2data = false;
-                        changebtn2 = false;
+                        // showbtn2data = false;
+                        // changebtn2 = false;
                         changebtn4 = false;
                         showbtn4data = false;
                       });
@@ -713,10 +857,10 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                     onTap: () {
                       setState(() {
                         changebtn4 = true;
-                        showbtn2data = false;
+                        //  showbtn2data = false;
                         showbtn3data = false;
                         showbtn4data = true;
-                        changebtn2 = false;
+                        //changebtn2 = false;
                         changebtn3 = false;
                       });
                     },
@@ -778,46 +922,45 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                             borderRadius: BorderRadius.circular(3)),
                         child: _image == null
                             ? Column(
-                          mainAxisAlignment:
-                          MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.image,
-                              color: Color(0xffEA9FA3),
-                              size: 45,
-                            ),
-                            Text(
-                              "대표이미지 등록",
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: Color(0xffE95252),
-                                  fontWeight: FontWeight.w300,
-                                  fontFamily: "Noto Sans KR"),
-                            ),
-                          ],
-                        )
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.image,
+                                    color: Color(0xffEA9FA3),
+                                    size: 45,
+                                  ),
+                                  Text(
+                                    "대표이미지 등록",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        color: Color(0xffE95252),
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                ],
+                              )
                             : Stack(
-                          children: [
-                            Container(
-                              width: 150,
-                              height: 90,
-                              child: Image.file(
-                                _image,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Center(
-                              child: Text(
-                                "대표이미지 변경",
-                                style: TextStyle(
-                                    fontSize: 10,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300,
-                                    fontFamily: "Noto Sans KR"),
-                              ),
-                            ),
-                          ],
-                        )),
+                                children: [
+                                  Container(
+                                    width: 150,
+                                    height: 90,
+                                    child: Image.file(
+                                      _image,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      "대표이미지 변경",
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          fontFamily: "Noto Sans KR"),
+                                    ),
+                                  ),
+                                ],
+                              )),
                   ),
                   InkWell(
                     onTap: () {
@@ -837,15 +980,15 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                           borderRadius: BorderRadius.circular(3)),
                       child: _image2 == null
                           ? Center(
-                        child: Icon(
-                          Icons.add,
-                          color: Color(0xffAAAAAA),
-                        ),
-                      )
+                              child: Icon(
+                                Icons.add,
+                                color: Color(0xffAAAAAA),
+                              ),
+                            )
                           : Image.file(
-                        _image2,
-                        fit: BoxFit.fill,
-                      ),
+                              _image2,
+                              fit: BoxFit.fill,
+                            ),
                     ),
                   ),
                 ],
@@ -1038,7 +1181,6 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         Text(
                           "제공내역",
                           style: TextStyle(
@@ -1056,6 +1198,7 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                             margin: EdgeInsets.only(top: 5),
                             height: 150,
                             child: TextFormField(
+                              focusNode: button3data1,
                               onChanged: (v) {
                                 if (v.length == 0) {
                                   setState(() {
@@ -1102,36 +1245,109 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                             primaryColorDark: Color(0xffDDDDDD),
                           ),
                           child: Container(
-                            margin: EdgeInsets.only(top: 5),
-                            height: 50,
-                            child: TextFormField(
-                              onChanged: (v) {
-                                if (v.length == 0) {
-                                  setState(() {
-                                    keywordValidate = false;
-                                  });
-                                } else {
-                                  setState(() {});
-                                  keywordValidate = true;
-                                }
-                              },
-                              decoration: new InputDecoration(
-                                hintText: "원하시는 검색키워드를 입력해주세요.",
-                                //   fillColor: Colors.white,
-                                hintStyle: TextStyle(
-                                    color: Color(0xffAAAAAA),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300,
-                                    fontFamily: "Noto Sans KR"),
-                                border: new OutlineInputBorder(),
-                                enabledBorder: new OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.grey, width: 0.0),
-                                ),
-                                //fillColor: Colors.green
-                              ),
-                            ),
+                              margin: EdgeInsets.only(top: 5),
+                              height: 80,
+                              child: TextFieldTags(
+                                  tagsStyler: TagsStyler(
+                                    tagDecoration: BoxDecoration(
+                                      color: Color(0xffEA9FA3),
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    tagCancelIcon: Icon(Icons.cancel,
+                                        size: 15.0, color: Colors.white),
+                                  ),
+                                  textFieldStyler: TextFieldStyler(
+                                    textFieldBorder: new OutlineInputBorder(),
+                                    textFieldEnabledBorder: OutlineInputBorder(
+                                      borderSide: changeboder1 ? const BorderSide(
+                                          color: Color(0xffEA9FA3), width: 2.0):const BorderSide(
+                                          color: Colors.grey, width: 0.0)
+                                    ),
+                                    hintText: "원하시는 검색키워드를 입력해주세요.",
+                                    hintStyle: TextStyle(
+                                        color: Color(0xffAAAAAA),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+
+                                  onTag: (tag) {
+                                    blogTags.add(tag);
+                                    print(blogTags);
+                                    setState(() {
+                                      changeboder1 = false;
+                                    });
+                                  },
+                                  onDelete: (tag) {
+                                    blogTags.remove(tag);
+                                    print(blogTags.toString() + "list");
+                                  },
+                                  validator: (tag) {
+                                    if (blogTags.length > 0) {
+                                      return "Only provide one tag";
+                                    }
+                                    return null;
+                                  })),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          "서브 키워드",
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Color(0xff333333),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Noto Sans KR"),
+                        ),
+                        Theme(
+                          data: new ThemeData(
+                            primaryColor: Color(0xffEA9FA3),
+                            primaryColorDark: Color(0xffDDDDDD),
                           ),
+                          child: Container(
+                              margin: EdgeInsets.only(top: 5),
+                              height: 80,
+                              child: TextFieldTags(
+                                  tagsStyler: TagsStyler(
+                                    tagDecoration: BoxDecoration(
+                                      color: Color(0xffEA9FA3),
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    tagCancelIcon: Icon(Icons.cancel,
+                                        size: 15.0, color: Colors.white),
+                                  ),
+                                  textFieldStyler: TextFieldStyler(
+                                    textFieldBorder: new OutlineInputBorder(),
+                                    textFieldEnabledBorder: OutlineInputBorder(
+                                      borderSide: changeboder2 ? const BorderSide(
+                                          color: Color(0xffEA9FA3), width: 2.0):const BorderSide(
+                                          color: Colors.grey, width: 0.0),
+                                    ),
+                                    hintText: "원하시는 검색키워드를 입력해주세요.",
+                                    hintStyle: TextStyle(
+                                        color: Color(0xffAAAAAA),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  onTag: (tag) {
+                                    blogTags2.add(tag);
+                                    print(blogTags2);
+                                    setState(() {
+                                      changeboder2 = false;
+                                    });
+                                  },
+                                  onDelete: (tag) {
+                                    blogTags2.remove(tag);
+                                    print(blogTags2.toString() + "list");
+                                  },
+                                  validator: (tag) {
+                                    if (blogTags2.length > 2) {
+                                      return "Only provide three tags";
+                                    }
+                                    return null;
+                                  })),
                         ),
                         SizedBox(
                           height: 30,
@@ -1153,6 +1369,7 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                             margin: EdgeInsets.only(top: 5),
                             height: 150,
                             child: TextFormField(
+                              focusNode: button3data2,
                               onChanged: (v) {
                                 if (v.length == 0) {
                                   setState(() {
@@ -1209,6 +1426,7 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                             margin: EdgeInsets.only(top: 5),
                             height: 150,
                             child: TextFormField(
+                              focusNode: button4data1,
                               onChanged: (v) {
                                 if (v.length == 0) {
                                   setState(() {
@@ -1255,36 +1473,48 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                             primaryColorDark: Color(0xffDDDDDD),
                           ),
                           child: Container(
-                            margin: EdgeInsets.only(top: 5),
-                            height: 50,
-                            child: TextFormField(
-                              onChanged: (v) {
-                                if (v.length == 0) {
-                                  setState(() {
-                                    hastagValidate = false;
-                                  });
-                                } else {
-                                  setState(() {});
-                                  hastagValidate = true;
-                                }
-                              },
-                              decoration: new InputDecoration(
-                                hintText: "원하시는 해시태그를 입력해주세요.",
-                                //   fillColor: Colors.white,
-                                hintStyle: TextStyle(
-                                    color: Color(0xffAAAAAA),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300,
-                                    fontFamily: "Noto Sans KR"),
-                                border: new OutlineInputBorder(),
-                                enabledBorder: new OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.grey, width: 0.0),
-                                ),
-                                //fillColor: Colors.green
-                              ),
-                            ),
-                          ),
+                              margin: EdgeInsets.only(top: 5),
+                              height: 80,
+                              child: TextFieldTags(
+                                  tagsStyler: TagsStyler(
+                                    tagDecoration: BoxDecoration(
+                                      color: Color(0xffEA9FA3),
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    tagCancelIcon: Icon(Icons.cancel,
+                                        size: 15.0, color: Colors.white),
+                                  ),
+                                  textFieldStyler: TextFieldStyler(
+                                    textFieldBorder: new OutlineInputBorder(),
+                                    textFieldEnabledBorder: OutlineInputBorder(
+                                      borderSide: changeboder3 ? const BorderSide(
+                                          color: Color(0xffEA9FA3), width: 2.0):const BorderSide(
+                                          color: Colors.grey, width: 0.0),
+                                    ),
+                                    hintText: "원하시는 검색키워드를 입력해주세요.",
+                                    hintStyle: TextStyle(
+                                        color: Color(0xffAAAAAA),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  onTag: (tag) {
+                                    intagramTags.add(tag);
+                                    print(intagramTags);
+                                    setState(() {
+                                      changeboder3 = false;
+                                    });
+                                  },
+                                  onDelete: (tag) {
+                                    intagramTags.remove(tag);
+                                    print(intagramTags.toString() + "list");
+                                  },
+                                  validator: (tag) {
+                                    if (intagramTags.length > 0) {
+                                      return "Only provide one tags";
+                                    }
+                                    return null;
+                                  })),
                         ),
                         SizedBox(
                           height: 30,
@@ -1303,35 +1533,48 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                             primaryColorDark: Color(0xffDDDDDD),
                           ),
                           child: Container(
-                            margin: EdgeInsets.only(top: 5),
-                            height: 50,
-                            child: TextFormField(
-                              onChanged: (v) {
-                                if (v.length == 0) {
-                                  setState(() {
-                                    persontagValidate = false;
-                                  });
-                                } else {
-                                  setState(() {});
-                                  persontagValidate = true;
-                                }
-                              },
-                              decoration: new InputDecoration(
-                                hintText: "태그하실 사용자이름을 입력해주세요.",
-                                //   fillColor: Colors.white,
-                                hintStyle: TextStyle(
-                                    color: Color(0xffAAAAAA),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300,
-                                    fontFamily: "Noto Sans KR"),
-                                border: new OutlineInputBorder(),
-                                enabledBorder: new OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.grey, width: 0.0),
-                                ),
-                              ),
-                            ),
-                          ),
+                              margin: EdgeInsets.only(top: 5),
+                              height: 80,
+                              child: TextFieldTags(
+                                  tagsStyler: TagsStyler(
+                                    tagDecoration: BoxDecoration(
+                                      color: Color(0xffEA9FA3),
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    tagCancelIcon: Icon(Icons.cancel,
+                                        size: 15.0, color: Colors.white),
+                                  ),
+                                  textFieldStyler: TextFieldStyler(
+                                    textFieldBorder: new OutlineInputBorder(),
+                                    textFieldEnabledBorder: OutlineInputBorder(
+                                      borderSide: changeboder4 ? const BorderSide(
+                                          color: Color(0xffEA9FA3), width: 2.0):const BorderSide(
+                                          color: Colors.grey, width: 0.0),
+                                    ),
+                                    hintText: "원하시는 검색키워드를 입력해주세요.",
+                                    hintStyle: TextStyle(
+                                        color: Color(0xffAAAAAA),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  onTag: (tag) {
+                                    intagramTags2.add(tag);
+                                    print(intagramTags2);
+                                    setState(() {
+                                      changeboder4 = false;
+                                    });
+                                  },
+                                  onDelete: (tag) {
+                                    intagramTags2.remove(tag);
+                                    print(intagramTags2.toString() + "list");
+                                  },
+                                  validator: (tag) {
+                                    if (intagramTags2.length > 2) {
+                                      return "Only provide three tags";
+                                    }
+                                    return null;
+                                  })),
                         ),
                         SizedBox(
                           height: 30,
@@ -1353,6 +1596,7 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                             margin: EdgeInsets.only(top: 5),
                             height: 150,
                             child: TextFormField(
+                              focusNode: button4data2,
                               onChanged: (v) {
                                 if (v.length == 0) {
                                   setState(() {
@@ -1389,39 +1633,104 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
                     )
                   : Container(),
               InkWell(
-                onTap: () {
-                  if (titleValidate == '') {
-                    title.requestFocus();
-                  } else if (desValidate == '') {
-                    des.requestFocus();
-                  } else if (periodValidate == '') {
-                    period.requestFocus();
-                  } else if (recruitmentValidate == '') {
-                    recruitment.requestFocus();
-                  } else if (amountValidate == '') {
-                    amount.requestFocus();
-                  } else {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return UserHome();
-                    }));
-                  }
-                },
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                      color: Color(0xffF9F8F8),
-                      border: Border.all(color: Color(0xffD1D0D0)),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Center(
-                      child: Text("서비스 등록",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xff666666),
-                              fontFamily: "Noto Sans KR",
-                              fontWeight: FontWeight.w300))),
-                ),
-              ),
+                  onTap: () {
+                    if (titleValidate == '' ||
+                        titleValidate.length < 2 ||
+                        titleValidate.length > 20) {
+                      message = "캠페인 제목을 입력해주세요";
+                      showAlertDialog(context);
+                      title.requestFocus();
+                    } else if (desValidate == '' ||
+                        desValidate.length < 2 ||
+                        desValidate.length > 30) {
+                      message = "캠페인 설명을 입력해주세요";
+                      showAlertDialog(context);
+                      des.requestFocus();
+                    } else if (_dateTime1.day == DateTime.now().day) {
+                      message = "캠페인 기간을 입력해주세요";
+                      showAlertDialog(context);
+                      date.requestFocus();
+                    } else if (recruitmentValidate == '') {
+                      message = "모집인원을 입력해주세요";
+                      showAlertDialog(context);
+                      recruitment.requestFocus();
+                    } else if (int.parse(recruitmentValidate) > 99) {
+                      message = "Enter correct number within 100";
+                      showAlertDialog(context);
+                      recruitment.requestFocus();
+                    } else if (amountValidate == '') {
+                      message = "제공 금액을 입력해주세요";
+                      showAlertDialog(context);
+                      amount.requestFocus();
+                    } else if (showbtn1data && !detailsValidate) {
+                      message = "방문가능 시간 및 안내사항을 입력해주세요";
+                      showAlertDialog(context);
+                      buttononedata.requestFocus();
+                    } else if (_image == null) {
+                      message = "캠페인 이미지를 등록해주세요";
+                      showAlertDialog(context);
+                    } else if (showbtn3data && !historyValidate) {
+                      message = "제공 내역을 입력해주세요";
+                      showAlertDialog(context);
+                      button3data1.requestFocus();
+                      print("done");
+                    } else if (showbtn3data && blogTags.length < 1) {
+                      setState(() {
+                        changeboder1 = true;
+                      });
+                      message = "메인 키워드를 입력해주세요";
+                      showAlertDialog(context);
+                    } else if (showbtn3data && blogTags2.length < 1) {
+                      setState(() {
+                        changeboder2 = true;
+                      });
+                      message = "서브 키워드를 입력해주세요";
+                      showAlertDialog(context);
+                    } else if (showbtn3data && !missionValidate) {
+                      message = "캠페인 미션을 입력해주세요";
+                      showAlertDialog(context);
+                      button3data2.requestFocus();
+                    } else if (showbtn4data && !historyValidate) {
+                      message = "제공 내역을 입력해주세요";
+                      showAlertDialog(context);
+                      button4data1.requestFocus();
+                      print("done");
+                    } else if (showbtn4data && intagramTags.length < 1) {
+                      setState(() {
+                        changeboder3 = true;
+                      });
+                      message = "해시태그를 입력해주세요";
+                      showAlertDialog(context);
+                    } else if (showbtn4data && intagramTags2.length < 1) {
+                      setState(() {
+                        changeboder4 = true;
+                      });
+                      message = "사람태그를 입력해주세요";
+                      showAlertDialog(context);
+                    } else if (showbtn4data && !missionValidate) {
+                      message = "캠페인 미션을 입력해주세요";
+                      showAlertDialog(context);
+                      button4data2.requestFocus();
+                    } else {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return UserHome();
+                      }));
+                    }
+                  },
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Color(0xffEA9FA3),
+                        borderRadius: BorderRadius.all(Radius.circular(3))),
+                    child: Center(
+                        child: Text("서비스 등록",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Color(0xffFFFFFF),
+                                fontWeight: FontWeight.w300,
+                                fontFamily: "Noto Sans KR"))),
+                  )),
               SizedBox(
                 height: 10,
               )
@@ -1430,5 +1739,51 @@ class _RegisteringcampaignScreenState extends State<RegisteringcampaignScreen> {
         ),
       ),
     );
+  }
+}
+
+class ThousandsSeparatorInputFormatter extends TextInputFormatter {
+  static const separator = ','; // Change this to '.' for other locales
+
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    // Short-circuit if the new value is empty
+    if (newValue.text.length == 0) {
+      return newValue.copyWith(text: '');
+    }
+
+    // Handle "deletion" of separator character
+    String oldValueText = oldValue.text.replaceAll(separator, '');
+    String newValueText = newValue.text.replaceAll(separator, '');
+
+    if (oldValue.text.endsWith(separator) &&
+        oldValue.text.length == newValue.text.length + 1) {
+      newValueText = newValueText.substring(0, newValueText.length - 1);
+    }
+
+    // Only process if the old value and new value are different
+    if (oldValueText != newValueText) {
+      int selectionIndex =
+          newValue.text.length - newValue.selection.extentOffset;
+      final chars = newValueText.split('');
+
+      String newString = '';
+      for (int i = chars.length - 1; i >= 0; i--) {
+        if ((chars.length - 1 - i) % 3 == 0 && i != chars.length - 1)
+          newString = separator + newString;
+        newString = chars[i] + newString;
+      }
+
+      return TextEditingValue(
+        text: newString.toString(),
+        selection: TextSelection.collapsed(
+          offset: newString.length - selectionIndex,
+        ),
+      );
+    }
+
+    // If the new value and old value are the same, just return as-is
+    return newValue;
   }
 }

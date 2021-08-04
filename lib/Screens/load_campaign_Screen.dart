@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class LoadCompaignScreen extends StatefulWidget {
+  String title = '';
+  String subtitle = '';
+  String recnumber = '';
+
+  LoadCompaignScreen({this.title, this.subtitle, this.recnumber});
+
   @override
   _LoadCompaignScreenState createState() => _LoadCompaignScreenState();
 }
@@ -59,7 +65,7 @@ class _LoadCompaignScreenState extends State<LoadCompaignScreen> {
                         width: 40,
                         height: 25,
                         decoration: BoxDecoration(
-                          color: Color(0xffE95252),
+                            color: Color(0xffE95252),
                             borderRadius: BorderRadius.circular(3)),
                         child: Center(
                           child: Text(
@@ -95,7 +101,7 @@ class _LoadCompaignScreenState extends State<LoadCompaignScreen> {
                     height: 4,
                   ),
                   Text(
-                    "[대전서구] 유달리 헤어샵",
+                    index == 0 ? widget.title : "[대전서구] 유달리 헤어샵",
                     style: TextStyle(
                         fontSize: 12,
                         color: Color(0xff333333),
@@ -106,7 +112,7 @@ class _LoadCompaignScreenState extends State<LoadCompaignScreen> {
                     height: 4,
                   ),
                   Text(
-                    "두피,모발 정밀검사 +관리",
+                    index == 0 ? widget.subtitle : "두피,모발 정밀검사 +관리",
                     style: TextStyle(
                         fontSize: 10.5,
                         color: Color(0xff666666),
@@ -117,7 +123,9 @@ class _LoadCompaignScreenState extends State<LoadCompaignScreen> {
                     height: 6,
                   ),
                   Text(
-                    "신청 26 / 6명",
+                    index == 0
+                        ? "신청 26 / " + widget.recnumber + "명"
+                        : "신청 26 / 6명",
                     style: TextStyle(
                         fontSize: 10,
                         color: Color(0xff666666),

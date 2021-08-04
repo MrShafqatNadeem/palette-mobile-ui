@@ -6,11 +6,14 @@ import 'package:palette/palette(influencer)/service_recruited_Screen_Insta.dart'
 
 import 'apply_for_campaign_screen.dart';
 import 'content_registration_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 class OnGoingCampaignScreen extends StatefulWidget {
+  bool insta;
+
+  OnGoingCampaignScreen({this.insta});
 
   @override
-  _OnGoingCampaignScreenState createState() =>
-      _OnGoingCampaignScreenState();
+  _OnGoingCampaignScreenState createState() => _OnGoingCampaignScreenState();
 }
 
 class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
@@ -34,14 +37,19 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
           ),
         ),
       ),
-      content: Text(
-        "캠페인 신청 취소",
-        textAlign: TextAlign.start,
-        style: TextStyle(
-          fontSize: 16.sp,
-          color: Color(0xff666666),
-          fontWeight: FontWeight.w400,
-          fontFamily: "Noto Sans KR",
+      content: InkWell(
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        child: Text(
+          "캠페인 신청 취소",
+          textAlign: TextAlign.start,
+          style: TextStyle(
+            fontSize: 16.sp,
+            color: Color(0xff666666),
+            fontWeight: FontWeight.w400,
+            fontFamily: "Noto Sans KR",
+          ),
         ),
       ),
     );
@@ -53,6 +61,13 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
         return alert;
       },
     );
+  }
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -135,29 +150,53 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                                width: 37.sp,
-                                height: 20.sp,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3),
-                                  border: Border.all(
-                                    color: Color(0xff0BC95F),
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "Blog",
-                                    style: TextStyle(
-                                        fontSize: 14.sp,
+                            widget.insta
+                                ? Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.165,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.03,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(3),
+                                      border: Border.all(
+                                        color: Color(0xffD00373),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Instagram",
+                                        style: TextStyle(
+                                            fontSize: 14.sp,
+                                            color: Color(0xffD00373),
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "yanoljayache"),
+                                      ),
+                                    ))
+                                : Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.1,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.03,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(3),
+                                      border: Border.all(
                                         color: Color(0xff0BC95F),
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: "yanoljayache"),
-                                  ),
-                                )),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Blog",
+                                        style: TextStyle(
+                                            fontSize: 14.sp,
+                                            color: Color(0xff0BC95F),
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "yanoljayache"),
+                                      ),
+                                    )),
                             SizedBox(width: 8.sp),
                             Container(
-                              width: 37.sp,
-                              height: 20.sp,
+                              width: MediaQuery.of(context).size.width * 0.1,
+                              height: MediaQuery.of(context).size.height * 0.03,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(3),
                                 border: Border.all(
@@ -179,7 +218,7 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
                         ),
                         Divider(
                           height: 46.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         //4 text + image container
                         Row(
@@ -191,81 +230,81 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
                               children: [
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "캠페인 신청기간",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff000000),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w500)),
-                                      TextSpan(
-                                          text: "    01.04 ~ 01.10",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff000000),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w500))
-                                    ])),
+                                  TextSpan(
+                                      text: "캠페인 신청기간",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff000000),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w500)),
+                                  TextSpan(
+                                      text: "    01.04 ~ 01.10",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff000000),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w500))
+                                ])),
                                 SizedBox(
                                   height: 8.sp,
                                 ),
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "인플루언서 발표",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400)),
-                                      TextSpan(
-                                          text: "    01.11",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400))
-                                    ])),
+                                  TextSpan(
+                                      text: "인플루언서 발표",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400)),
+                                  TextSpan(
+                                      text: "    01.11",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400))
+                                ])),
                                 SizedBox(
                                   height: 8.sp,
                                 ),
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "콘텐츠 등록기간",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400)),
-                                      TextSpan(
-                                          text: "    01.11 ~ 01.25",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400))
-                                    ])),
+                                  TextSpan(
+                                      text: "콘텐츠 등록기간",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400)),
+                                  TextSpan(
+                                      text: "    01.11 ~ 01.25",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400))
+                                ])),
                                 SizedBox(
                                   height: 8.sp,
                                 ),
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "캠페인 종료일",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400)),
-                                      TextSpan(
-                                          text: "    01.25",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400))
-                                    ])),
+                                  TextSpan(
+                                      text: "캠페인 종료일",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400)),
+                                  TextSpan(
+                                      text: "        01.25",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400))
+                                ])),
                               ],
                             ),
                             Container(
@@ -299,7 +338,7 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
                         ),
                         Divider(
                           height: 41.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         Container(
@@ -307,23 +346,6 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
                           width: MediaQuery.of(context).size.width,
                           child: Image.asset("assets/images/test.jpg",
                               fit: BoxFit.fill),
-                        ),
-                        SizedBox(
-                          height: 10.sp,
-                        ),
-                        Container(
-                          height: 40.sp,
-                          decoration: BoxDecoration(
-                              color: Color(0xffF9F8F8),
-                              border: Border.all(color: Color(0xffD1D0D0)),
-                              borderRadius: BorderRadius.circular(3)),
-                          child: Center(
-                              child: Text("상세페이지 더보기",
-                                  style: TextStyle(
-                                      fontSize: 13.sp,
-                                      color: Color(0xff666666),
-                                      fontFamily: "Noto Sans KR",
-                                      fontWeight: FontWeight.w500))),
                         ),
 
                         SizedBox(
@@ -395,7 +417,7 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
 
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         // box 2
                         Text(
@@ -463,7 +485,7 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
                         ),
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         Text(
@@ -520,7 +542,7 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
                         ),
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         // box 3
@@ -598,11 +620,37 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
                               fontWeight: FontWeight.w400,
                               fontFamily: "Noto Sans KR"),
                         ),
-                        Divider(
-                          height: 56.sp,
-                          thickness: 2,
-                        ),
-
+                        Divider(height: 56.sp, thickness: 1),
+                        widget.insta
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "사람태그",
+                                    style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: Color(0xff333333),
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    "@dunsan_aesthetics",
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        color: Color(0xff666666),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  Divider(
+                                    height: 56.sp,
+                                    thickness: 1,
+                                  ),
+                                ],
+                              )
+                            : Container(),
                         // box 4
 
                         Text(
@@ -649,34 +697,44 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
                         SizedBox(
                           height: 10,
                         )
-
                       ]),
                 ),
               ),
-              InkWell(
-                onTap: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
-                        return ContentRegistrationScreen();
-                      }));
-                },
-                child: Row(
-                  children: [
-                    Container(
+              Row(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      setState(() {
+                        _makePhoneCall('tel:123456789');
+                      });
+                    },
+                    child: Container(
                       height: 52.sp,
-                      width: 95.sp,
+                      width: MediaQuery.of(context).size.width* 0.23,
                       decoration: BoxDecoration(
                           color: Color(0xffAAAAAA),
                           borderRadius: BorderRadius.circular(3)),
                       child: Center(
-                          child: Icon(Icons.phone , color: Colors.white, size: 30.sp,)),
+                          child: Icon(
+                        Icons.phone,
+                        color: Colors.white,
+                        size: 30.sp,
+                      )),
                     ),
-                    SizedBox(
-                      width: 9.sp,
-                    ),
-                    Container(
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width* 0.03,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return ContentRegistrationScreen();
+                      }));
+                    },
+                    child: Container(
                       height: 52.sp,
-                      width: 250.sp,
+                      width: MediaQuery.of(context).size.width* 0.63,
                       decoration: BoxDecoration(
                           color: Color(0xffEA9FA3),
                           borderRadius: BorderRadius.circular(3)),
@@ -688,11 +746,11 @@ class _OnGoingCampaignScreenState extends State<OnGoingCampaignScreen> {
                                   fontFamily: "Noto Sans KR",
                                   fontWeight: FontWeight.w500))),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               SizedBox(
-                height: 8,
+                height: 16,
               ),
             ],
           ),

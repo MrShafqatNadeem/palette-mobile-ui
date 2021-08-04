@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:palette/widgets/floatingbutton.dart';
 
 class FilterScreen extends StatefulWidget {
   @override
@@ -226,7 +227,7 @@ class _FilterScreenState extends State<FilterScreen> {
                             :Color(0xffAAAAAA)),
                         borderRadius: BorderRadius.all(Radius.circular(30.sp))),
                     child: Center(
-                        child: Text("블로그",
+                        child: Text("인스타그램",
                             style: TextStyle(
                                 fontSize: 12.sp,
                                 color:  selectsns2
@@ -352,6 +353,14 @@ class _FilterScreenState extends State<FilterScreen> {
           ],
         ),
       ),
+      floatingActionButton: InkWell(
+          onTap: (){
+          },
+          child: FloatingButton(text: "확인",)
+      ),
+
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

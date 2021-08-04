@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:palette/palette(influencer)/login_screeni.dart';
 
 import 'login_Screen.dart';
 
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
             style: TextStyle(
                 fontSize: 50,
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w700,
                 fontFamily: "yanoljayache"),
           ),
         ),

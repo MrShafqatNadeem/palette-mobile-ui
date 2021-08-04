@@ -2,7 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class ServiceRecruitedInstsScreen extends StatefulWidget {
+  bool offline;
+
+  ServiceRecruitedInstsScreen({this.offline});
+
   @override
   _ServiceRecruitedInstsScreenState createState() =>
       _ServiceRecruitedInstsScreenState();
@@ -10,7 +15,6 @@ class ServiceRecruitedInstsScreen extends StatefulWidget {
 
 class _ServiceRecruitedInstsScreenState
     extends State<ServiceRecruitedInstsScreen> {
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
@@ -58,7 +62,7 @@ class _ServiceRecruitedInstsScreenState
                         Text(
                           "(서비스 제목 표시)[대전] 더예쁜 손톱레푸스 둔산점",
                           style: TextStyle(
-                              fontSize: 16.sp,
+                              fontSize: 16.5.sp,
                               color: Color(0xff333333),
                               fontWeight: FontWeight.w700,
                               fontFamily: "Noto Sans KR"),
@@ -79,8 +83,8 @@ class _ServiceRecruitedInstsScreenState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                width: 62,
-                                height: 22,
+                                width: MediaQuery.of(context).size.width*0.165,
+                                height:MediaQuery.of(context).size.height*0.03,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(3),
                                   border: Border.all(
@@ -99,8 +103,8 @@ class _ServiceRecruitedInstsScreenState
                                 )),
                             SizedBox(width: 8.sp),
                             Container(
-                              width: 40,
-                              height: 22,
+                              width: MediaQuery.of(context).size.width*0.1,
+                              height:MediaQuery.of(context).size.height*0.03,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(3),
                                 border: Border.all(
@@ -122,7 +126,7 @@ class _ServiceRecruitedInstsScreenState
                         ),
                         Divider(
                           height: 46.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         //4 text + image container
                         Row(
@@ -196,7 +200,7 @@ class _ServiceRecruitedInstsScreenState
                                     text: TextSpan(children: <TextSpan>[
                                   TextSpan(
                                       text: "서비스 등록기간",
-                                      style:TextStyle(
+                                      style: TextStyle(
                                           fontSize: 13.sp,
                                           color: Color(0xff666666),
                                           fontFamily: "Noto Sans KR",
@@ -242,7 +246,7 @@ class _ServiceRecruitedInstsScreenState
                         ),
                         Divider(
                           height: 41.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         Container(
@@ -251,24 +255,6 @@ class _ServiceRecruitedInstsScreenState
                           child: Image.asset("assets/images/test.jpg",
                               fit: BoxFit.fill),
                         ),
-                        SizedBox(
-                          height: 10.sp,
-                        ),
-                        Container(
-                          height: 40.sp,
-                          decoration: BoxDecoration(
-                              color: Color(0xffF9F8F8),
-                              border: Border.all(color: Color(0xffD1D0D0)),
-                              borderRadius: BorderRadius.circular(3)),
-                          child: Center(
-                              child: Text("상세페이지 더보기",
-                                  style: TextStyle(
-                                      fontSize: 13.sp,
-                                      color: Color(0xff666666),
-                                      fontFamily: "Noto Sans KR",
-                                      fontWeight: FontWeight.w500))),
-                        ),
-
                         SizedBox(
                           height: 26.sp,
                         ),
@@ -338,76 +324,84 @@ class _ServiceRecruitedInstsScreenState
 
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
-                        // box 2
-                        Text(
-                          "방문 및 예약안내",
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Color(0xff333333),
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "Noto Sans KR"),
-                        ),
-                        SizedBox(
-                          height: 12.sp,
-                        ),
-                        Text(
-                          "- 주소 : 대전광역시 서구 둔산동 111, 1층 ",
-                          style: TextStyle(
-                              fontSize: 13.sp,
-                              color: Color(0xff666666),
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Noto Sans KR"),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          "- 인플루언서 방문 가능 시간 : 평일 10:00~21:00 ",
-                          style: TextStyle(
-                              fontSize: 13.sp,
-                              color: Color(0xff666666),
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Noto Sans KR"),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          "- 영업시간 : 평일 10:00~21:00 / 토요일 : 10:00~20:00 ",
-                          style: TextStyle(
-                              fontSize: 13.sp,
-                              color: Color(0xff666666),
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Noto Sans KR"),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          "     일요일 및 공휴일 휴무(리뷰시 참고) ",
-                          style: TextStyle(
-                              fontSize: 13.sp,
-                              color: Color(0xff666666),
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Noto Sans KR"),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          "- 주말방문 불가",
-                          style: TextStyle(
-                              fontSize: 13.sp,
-                              color: Color(0xff666666),
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Noto Sans KR"),
-                        ),
-                        Divider(
-                          height: 56.sp,
-                          thickness: 2,
-                        ),
+                        // box2
+
+                        widget.offline
+                            ? Container()
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "방문 및 예약안내",
+                                    style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: Color(0xff333333),
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  SizedBox(
+                                    height: 12.sp,
+                                  ),
+                                  Text(
+                                    "- 주소 : 대전광역시 서구 둔산동 111, 1층 ",
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        color: Color(0xff666666),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    "- 인플루언서 방문 가능 시간 : 평일 10:00~21:00 ",
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        color: Color(0xff666666),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    "- 영업시간 : 평일 10:00~21:00 / 토요일 : 10:00~20:00 ",
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        color: Color(0xff666666),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    "     일요일 및 공휴일 휴무(리뷰시 참고) ",
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        color: Color(0xff666666),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    "- 주말방문 불가",
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        color: Color(0xff666666),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "Noto Sans KR"),
+                                  ),
+                                  Divider(
+                                    height: 56.sp,
+                                    thickness: 1,
+                                  ),
+                                ],
+                              ),
 
                         // box 3
                         Text(
@@ -475,7 +469,7 @@ class _ServiceRecruitedInstsScreenState
                         ),
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         // box 4
@@ -500,7 +494,7 @@ class _ServiceRecruitedInstsScreenState
                         ),
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         // box 5
@@ -580,7 +574,7 @@ class _ServiceRecruitedInstsScreenState
                         ),
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         Text(
                           "팔레트 필독 안내사항",
@@ -643,7 +637,7 @@ class _ServiceRecruitedInstsScreenState
                             fontWeight: FontWeight.w500))),
               ),
               SizedBox(
-                height: 8,
+                height: 16,
               ),
             ],
           ),

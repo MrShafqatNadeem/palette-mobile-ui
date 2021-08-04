@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:palette/palette(influencer)/privacy_screeni.dart';
+import 'package:palette/palette(influencer)/terms_condition_screeni.dart';
 import 'package:palette/widgets/custom_text.dart';
 import 'package:palette/widgets/custom_textfield.dart';
+import 'package:palette/widgets/floatingbutton.dart';
 
 import 'navigation _bar.dart';
 
@@ -44,6 +47,7 @@ class _SignupScreenState extends State<SignupScreen> {
         designSize: Size(375, 812),
         orientation: Orientation.portrait);
     return Scaffold(
+        resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: InkWell(
           onTap: () {
@@ -122,13 +126,20 @@ class _SignupScreenState extends State<SignupScreen> {
                   SizedBox(
                     width: 10.6.sp,
                   ),
-                  Text(
-                    "블로그",
-                    style: TextStyle(
-                        fontSize: 13.sp,
-                        color: Color(0xff666666),
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Noto Sans KR"),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        blogheckbox = !blogheckbox;
+                      });
+                    },
+                    child: Text(
+                      "블로그",
+                      style: TextStyle(
+                          fontSize: 13.sp,
+                          color: Color(0xff666666),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Noto Sans KR"),
+                    ),
                   ),
                 ],
               ),
@@ -157,33 +168,42 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: instagramheckbox ? Color(0xff333333) : Colors.white,
+                          color: instagramheckbox
+                              ? Color(0xff333333)
+                              : Colors.white,
                           border: Border.all(color: Color(0xffE1E1E1))),
                       child: Padding(
                           padding: const EdgeInsets.all(1.0),
                           child: instagramheckbox
                               ? Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )
                               : Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )),
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )),
                     ),
                   ),
                   SizedBox(
                     width: 10.6.sp,
                   ),
-                  Text(
-                    "인스타그램",
-                    style: TextStyle(
-                        fontSize: 13.sp,
-                        color: Color(0xff666666),
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Noto Sans KR"),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        instagramheckbox = !instagramheckbox;
+                      });
+                    },
+                    child: Text(
+                      "인스타그램",
+                      style: TextStyle(
+                          fontSize: 13.sp,
+                          color: Color(0xff666666),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Noto Sans KR"),
+                    ),
                   ),
                 ],
               ),
@@ -200,7 +220,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               Divider(
                 height: 53.sp,
-                thickness: 2,
+                thickness: 1,
               ),
               Row(
                 children: [
@@ -228,27 +248,43 @@ class _SignupScreenState extends State<SignupScreen> {
                           padding: const EdgeInsets.all(1.0),
                           child: checkbox1
                               ? Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )
                               : Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )),
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )),
                     ),
                   ),
                   SizedBox(
                     width: 15,
                   ),
-                  Text(
-                    "전체 약관 동의",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xff333333),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "Noto Sans KR"),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        checkbox1 = !checkbox1;
+                        checkbox2 && checkbox1
+                            ? checkbox2 = true
+                            : checkbox2 = !checkbox2;
+                        checkbox3 && checkbox1
+                            ? checkbox3 = true
+                            : checkbox3 = !checkbox3;
+                        checkbox4 && checkbox1
+                            ? checkbox4 = true
+                            : checkbox4 = !checkbox4;
+                      });
+                    },
+                    child: Text(
+                      "전체 약관 동의",
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xff333333),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "Noto Sans KR"),
+                    ),
                   ),
                 ],
               ),
@@ -272,38 +308,52 @@ class _SignupScreenState extends State<SignupScreen> {
                           padding: const EdgeInsets.all(1.0),
                           child: checkbox2
                               ? Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )
                               : Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )),
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )),
                     ),
                   ),
                   SizedBox(
                     width: 15,
                   ),
-                  Text(
-                    "서비스 이용약관 동의(필수)",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xff666666),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "Noto Sans KR"),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        checkbox1 ? checkbox2 = true : checkbox2 = !checkbox2;
+                      });
+                    },
+                    child: Text(
+                      "서비스 이용약관 동의(필수)",
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xff666666),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "Noto Sans KR"),
+                    ),
                   ),
-                  SizedBox(
-                    width: 123,
-                  ),
-                  Text(
-                    "상세",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xff666666),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "Noto Sans KR"),
+                Expanded(child: Container(),),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return TermsConditionScreeni();
+                      }));
+                    },
+                    child: Text(
+                      "상세",
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontSize: 12,
+                          color: Color(0xff666666),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "Noto Sans KR"),
+                    ),
                   ),
                 ],
               ),
@@ -327,38 +377,52 @@ class _SignupScreenState extends State<SignupScreen> {
                           padding: const EdgeInsets.all(1.0),
                           child: checkbox3
                               ? Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )
                               : Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )),
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )),
                     ),
                   ),
                   SizedBox(
                     width: 15,
                   ),
-                  Text(
-                    "개인정보 수집 및 이용에 동의(필수)",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xff666666),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "Noto Sans KR"),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        checkbox1 ? checkbox3 = true : checkbox3 = !checkbox3;
+                      });
+                    },
+                    child: Text(
+                      "개인정보 수집 및 이용에 동의(필수)",
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xff666666),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "Noto Sans KR"),
+                    ),
                   ),
-                  SizedBox(
-                    width: 85,
-                  ),
-                  Text(
-                    "상세",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xff666666),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "Noto Sans KR"),
+                  Expanded(child: Container(),),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return PrivacyScreeni();
+                      }));
+                    },
+                    child: Text(
+                      "상세",
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontSize: 12,
+                          color: Color(0xff666666),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "Noto Sans KR"),
+                    ),
                   )
                 ],
               ),
@@ -382,77 +446,98 @@ class _SignupScreenState extends State<SignupScreen> {
                           padding: const EdgeInsets.all(1.0),
                           child: checkbox4
                               ? Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )
                               : Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )),
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )),
                     ),
                   ),
                   SizedBox(
                     width: 15,
                   ),
-                  Text(
-                    "서비스 모집 및 추천 설문조사, 이벤트 정보등의 \n 이메일 수신에 동의(선택)",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xff666666),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "Noto Sans KR"),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        checkbox1 ? checkbox4 = true : checkbox4 = !checkbox4;
+                      });
+                    },
+                    child: Text(
+                      "서비스 모집 및 추천 설문조사, 이벤트 정보등의 \n 이메일 수신에 동의(선택)",
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xff666666),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "Noto Sans KR"),
+                    ),
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 25.5.sp,
-              ),
-              InkWell(
-                onTap: () {
-                  // if (checkbox2 && checkbox3) {
-                    if (nickname == '') {
-                      name.requestFocus();
-                    }  else if (blog == '') {
-                      blogf.requestFocus();
-                    }
-                    else if (instagram == '') {
-                      instagramf.requestFocus();
-                    }
-                    else {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                            return NavigationBar();
-                          }));
-                    }
-                //  }
-                //
-                //   else {
-                //     setState(() {
-                //       message = "서비스 및 개인정보 이용약관에 동의하세요";
-                //       showAlertDialog(context);
-                //     });
-                //   }
-                },
-                child: Container(
-                  height: 52.sp,
-                  decoration: BoxDecoration(
-                      color: Color(0xffEA9FA3),
-                      borderRadius: BorderRadius.all(Radius.circular(3))),
-                  child: Center(
-                      child: Text("가입완료",
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Color(0xffFFFFFF),
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Noto Sans KR"))),
-                ),
               ),
             ],
           ),
         ),
       ),
+      floatingActionButton: InkWell(
+          onTap: () {
+            // if (checkbox2 && checkbox3) {
+            if (nickname.length < 2 || nickname.length > 10) {
+              name.requestFocus();
+            } else if (nickname == '') {
+              name.requestFocus();
+            } else if (blogheckbox || instagramheckbox == true) {
+              if (blogheckbox == true) {
+                print("blog");
+                if (blog == '') {
+                  blogf.requestFocus();
+                } else if (instagramheckbox == true) {
+                  if (instagram == '') {
+                    instagramf.requestFocus();
+                  } else if (checkbox3 && checkbox2 == true) {
+                    print("checkbox empty");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return NavigationBar();
+                        }));
+                  }
+                } else if (checkbox3 && checkbox2 == true) {
+                  print("checkbox empty");
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                        return NavigationBar();
+                      }));
+                }
+              } else if (instagramheckbox == true) {
+                if (instagram == '') {
+                  instagramf.requestFocus();
+                } else if (checkbox3 && checkbox2 == true) {
+                  print("checkbox empty");
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                        return NavigationBar();
+                      }));
+                }
+              }
+            } else {
+              blogf.requestFocus();
+            }
+            //  }
+            //
+            //   else {
+            //     setState(() {
+            //       message = "서비스 및 개인정보 이용약관에 동의하세요";
+            //       showAlertDialog(context);
+            //     });
+            //   }
+          },
+          child: FloatingButton(text: "가입완료",)
+      ),
+
+
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

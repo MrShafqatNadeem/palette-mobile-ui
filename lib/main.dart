@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:palette/Screens/campaign_recruited_Screen.dart';
 import 'package:palette/palette(influencer)/apply_for_campaign_screen.dart';
 import 'package:palette/palette(influencer)/content_registration_screen.dart';
@@ -15,7 +17,6 @@ import 'package:palette/palette(influencer)/signup_screen.dart';
 import 'package:palette/palette(influencer)/storesScreen.dart';
 import 'package:palette/widgets/bottom_Bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'Screens/Selectors_Screen.dart';
 import 'Screens/applicants_Screen.dart';
 import 'Screens/campaign_recruited_Screen_Insta.dart';
@@ -31,8 +32,15 @@ import 'Screens/signUp_Screen.dart';
 import 'Screens/splash_Screen.dart';
 import 'palette(influencer)/changing_information_screen.dart';
 import 'palette(influencer)/filter_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 void main() async {
-  runApp(palette());
+  runApp(palette()
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) => palette(), // Wrap your app
+    // ),
+  );
 }
 
 class palette extends StatelessWidget {
@@ -43,13 +51,24 @@ class palette extends StatelessWidget {
     // ));
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Palette",
-      theme: ThemeData(
-        primaryColor: Colors.white,
-        canvasColor: Colors.white,
-      ),
-      home:   NavigationBar()
-    );
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          // if it's a RTL language
+        ],
+        supportedLocales: [
+          const Locale('ko', 'KR'),
+          // include country code too
+        ],
+        debugShowCheckedModeBanner: false,
+        title: "Supplier",
+        theme: ThemeData(
+          primaryColor: Colors.white,
+          canvasColor: Colors.white,
+        ),
+      //  locale: DevicePreview.locale(context),
+        // Add the locale here
+     //   builder: DevicePreview.appBuilder,
+        home: SplashScreen());
   }
 }

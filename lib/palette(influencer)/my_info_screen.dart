@@ -9,6 +9,7 @@ import 'package:palette/palette(influencer)/terms_condition_screeni.dart';
 
 import 'changing_information_screen.dart';
 import 'faq_Screeni.dart';
+import 'login_screeni.dart';
 import 'notice_screeni.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -69,7 +70,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
               ),
               Divider(
-                thickness: 2,
+                thickness: 1,
                 height: 31.sp,
               ),
               InkWell(
@@ -94,32 +95,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
               ),
               Divider(
-                thickness: 2,
-                height: 31.sp,
-              ),
-              InkWell(
-                onTap: (){
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) {
-                  //       return FAQScreen();
-                  //     }));
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(left: 20.sp),
-                  child: Text(
-                    "평가 관리",
-                    style: TextStyle(
-                        fontSize: 16.sp,
-                        color: Color(0xff333333),
-                        fontFamily: "Noto Sans KR",
-                        fontWeight: FontWeight.w500),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-              ),
-              Divider(
-                thickness: 2,
+                thickness: 1,
                 height: 31.sp,
               ),
               InkWell(
@@ -144,7 +120,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
               ),
               Divider(
-                thickness: 2,
+                thickness: 1,
                 height: 31.sp,
               ),
               InkWell(
@@ -169,7 +145,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
               ),
               Divider(
-                thickness: 2,
+                thickness: 1,
                 height: 31.sp,
               ),
               InkWell(
@@ -194,7 +170,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
               ),
               Divider(
-                thickness: 2,
+                thickness: 1,
                 height: 31.sp,
               ),
               InkWell(
@@ -219,7 +195,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
               ),
               Divider(
-                thickness: 2,
+                thickness: 1,
                 height: 31.sp,
               ),
               InkWell(
@@ -244,7 +220,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
               ),
               Divider(
-                thickness: 2,
+                thickness: 1,
                 height: 31.sp,
               ),
               Container(
@@ -252,7 +228,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 width: MediaQuery.of(context).size.width,
                 child: InkWell(
                   onTap: (){
-
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return LoginScreenI();
+                        }));
                   },
                   child: Text(
                     "로그아웃",

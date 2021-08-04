@@ -7,9 +7,9 @@ class CustomTextField extends StatefulWidget {
   FocusNode focusNode;
   String hint;
   Function(String) onchange;
-
-
-  CustomTextField({this.context, this.focusNode,this.hint, this.onchange});
+  bool enable = true;
+ Color colors = Colors.white;
+  CustomTextField({this.context, this.focusNode,this.hint, this.onchange , this.enable , this.colors});
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -27,11 +27,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
       ),
       child: Container(
         margin: EdgeInsets.only(top: 11.sp),
-        height: 46.sp,
+        height: 56.sp,
         child: TextFormField(
+          enabled: widget.enable,
           focusNode: widget.focusNode,
           onChanged: widget.onchange,
           decoration: new InputDecoration(
+            fillColor: widget.colors == null ? Colors.white : widget.colors ,
+            filled: true,
             hintText: widget.hint,
             hintStyle: TextStyle(
                 color: Color(0xffAAAAAA),

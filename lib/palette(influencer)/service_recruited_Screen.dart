@@ -3,15 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:palette/palette(influencer)/service_recruited_Screen_Insta.dart';
-class ServicesRecruitedScreen extends StatefulWidget {
 
+class ServicesRecruitedScreen extends StatefulWidget {
   @override
   _ServicesRecruitedScreenState createState() =>
       _ServicesRecruitedScreenState();
 }
 
 class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
@@ -80,8 +79,8 @@ class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                width: 37.sp,
-                                height: 20.sp,
+                                width: MediaQuery.of(context).size.width*0.1,
+                                height:MediaQuery.of(context).size.height*0.03,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(3),
                                   border: Border.all(
@@ -100,8 +99,8 @@ class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
                                 )),
                             SizedBox(width: 8.sp),
                             Container(
-                              width: 37.sp,
-                              height: 20.sp,
+                              width: MediaQuery.of(context).size.width*0.1,
+                              height:MediaQuery.of(context).size.height*0.03,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(3),
                                 border: Border.all(
@@ -121,10 +120,7 @@ class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
                             ),
                           ],
                         ),
-                        Divider(
-                          height: 46.sp,
-                          thickness: 2,
-                        ),
+                        Divider(height: 46.sp, thickness: 1),
                         //4 text + image container
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,81 +131,81 @@ class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
                               children: [
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "서비스 신청기간",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff000000),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w500)),
-                                      TextSpan(
-                                          text: "    01.04 ~ 01.10",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff000000),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w500))
-                                    ])),
+                                  TextSpan(
+                                      text: "서비스 신청기간",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff000000),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w500)),
+                                  TextSpan(
+                                      text: "    01.04 ~ 01.10",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff000000),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w500))
+                                ])),
                                 SizedBox(
                                   height: 8.sp,
                                 ),
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "인플루언서 발표",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400)),
-                                      TextSpan(
-                                          text: "    01.11",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400))
-                                    ])),
+                                  TextSpan(
+                                      text: "인플루언서 발표",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400)),
+                                  TextSpan(
+                                      text: "    01.11",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400))
+                                ])),
                                 SizedBox(
                                   height: 8.sp,
                                 ),
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "서비스 이용기간",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400)),
-                                      TextSpan(
-                                          text: "    01.11 ~ 01.25",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400))
-                                    ])),
+                                  TextSpan(
+                                      text: "서비스 이용기간",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400)),
+                                  TextSpan(
+                                      text: "    01.11 ~ 01.25",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400))
+                                ])),
                                 SizedBox(
                                   height: 8.sp,
                                 ),
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "서비스 등록기간",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400)),
-                                      TextSpan(
-                                          text: "    01.25 ~ 02.07",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w400))
-                                    ])),
+                                  TextSpan(
+                                      text: "서비스 등록기간",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400)),
+                                  TextSpan(
+                                      text: "    01.25 ~ 02.07",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w400))
+                                ])),
                               ],
                             ),
                             Container(
@@ -243,7 +239,7 @@ class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
                         ),
                         Divider(
                           height: 41.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         Container(
@@ -339,7 +335,7 @@ class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
 
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         // box 2
                         Text(
@@ -407,7 +403,7 @@ class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
                         ),
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         Text(
@@ -464,7 +460,7 @@ class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
                         ),
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         // box 3
@@ -544,7 +540,7 @@ class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
                         ),
                         Divider(
                           height: 56.sp,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         // box 4
@@ -593,30 +589,28 @@ class _ServicesRecruitedScreenState extends State<ServicesRecruitedScreen> {
                         SizedBox(
                           height: 10,
                         )
-
                       ]),
                 ),
               ),
               InkWell(
-                onTap: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
-                        return ServiceRecruitedInstsScreen();
-                      }));
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ServiceRecruitedInstsScreen();
+                  }));
                 },
                 child: Container(
-                    height: 52.sp,
-                    decoration: BoxDecoration(
-                        color: Color(0xffEA9FA3),
-                        borderRadius: BorderRadius.circular(3)),
-                    child: Center(
-                        child: Text("서비스 신청하기",
-                            style: TextStyle(
-                                fontSize: 15.sp,
-                                color: Color(0xffFFFFFF),
-                                fontFamily: "Noto Sans KR",
-                                fontWeight: FontWeight.w500))),
-                  ),
+                  height: 52.sp,
+                  decoration: BoxDecoration(
+                      color: Color(0xffEA9FA3),
+                      borderRadius: BorderRadius.circular(3)),
+                  child: Center(
+                      child: Text("서비스 신청하기",
+                          style: TextStyle(
+                              fontSize: 15.sp,
+                              color: Color(0xffFFFFFF),
+                              fontFamily: "Noto Sans KR",
+                              fontWeight: FontWeight.w500))),
+                ),
               ),
               SizedBox(
                 height: 8,

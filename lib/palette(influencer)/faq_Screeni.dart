@@ -42,41 +42,41 @@ class _FAQScreeniState extends State<FAQScreeni> {
       ),
       body: Container(
         padding: EdgeInsets.only(
-          top: 45.sp,
+          top: 10.sp,
         ),
         child: Column(
           children: [
-            ListTile(
-                title: InkWell(
-                  onTap: () {
-                    setState(() {
-                      showdata = false;
-                    });
-                  },
-                  child: Text(
-                    "캠페인은 어떻게 이용하나요?",
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: Color(0xff333333),
-                      fontWeight: showdata ? FontWeight.w400 : FontWeight.w700,
-                      fontFamily: "Noto Sans KR",
-                    ),
-                  ),
-                ),
-                trailing: showdata
-                    ? Icon(
-                  Icons.keyboard_arrow_down_sharp,
-                  color: Color(0xffAAAAAA),
-                )
-                    : Container(
-                  width: 1,
-                )),
-            Divider(
-              thickness: 2,
-              height: 0,
-              endIndent: 15,
-              indent: 15,
-            ),
+            // ListTile(
+            //     title: InkWell(
+            //       onTap: () {
+            //         setState(() {
+            //           showdata = false;
+            //         });
+            //       },
+            //       child: Text(
+            //         "캠페인은 어떻게 이용하나요?",
+            //         style: TextStyle(
+            //           fontSize: 16.sp,
+            //           color: Color(0xff333333),
+            //           fontWeight: showdata ? FontWeight.w400 : FontWeight.w700,
+            //           fontFamily: "Noto Sans KR",
+            //         ),
+            //       ),
+            //     ),
+            //     trailing: showdata
+            //         ? Icon(
+            //       Icons.keyboard_arrow_down_sharp,
+            //       color: Color(0xffAAAAAA),
+            //     )
+            //         : Container(
+            //       width: 1,
+            //     )),
+            // Divider(
+            //   thickness: 1,
+            //   height: 0,
+            //   endIndent: 15,
+            //   indent: 15,
+            // ),
             !showdata
                 ? Expanded(
               child: Container(
@@ -94,29 +94,33 @@ class _FAQScreeniState extends State<FAQScreeni> {
                 ),
               ),
             )
-                : Expanded(
+                :
+            Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: 10,
+                itemCount: 500,
                 itemBuilder: (BuildContext context, int index) => Column(
                   children: [
-                    ListTile(
-                      title: Text(
-                        "캠페인신청은 어떻게 하나요?",
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: Color(0xff333333),
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Noto Sans KR",
+                    InkWell(
+                  onTap: () {
+                              setState(() {
+                                showdata = false;
+                              });
+                            },
+                            child: ListTile(
+                        title: Text(
+                          "캠페인신청은 어떻게 하나요?",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: Color(0xff333333),
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "Noto Sans KR",
+                          ),
                         ),
-                      ),
-                      trailing: Icon(
-                        Icons.keyboard_arrow_down_sharp,
-                        color: Color(0xffAAAAAA),
                       ),
                     ),
                     Divider(
-                      thickness: 2,
+                      thickness: 1,
                       height: 0,
                       endIndent: 15,
                       indent: 15,
@@ -130,7 +134,7 @@ class _FAQScreeniState extends State<FAQScreeni> {
                 : Column(
               children: [
                 Divider(
-                  thickness: 2,
+                  thickness: 1,
                   height: 0,
                   endIndent: 15,
                   indent: 15,

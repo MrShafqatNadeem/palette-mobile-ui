@@ -14,66 +14,79 @@ class _SelectShippingAdressScreenState
 
   showAlertDialog(BuildContext context) {
     AlertDialog alert = AlertDialog(
-      content: Text(
-        "삭제 하시겠습니까?",
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 15.sp,
-          color: Color(0xff666666),
-          fontWeight: FontWeight.w400,
-          fontFamily: "Noto Sans KR",
-        ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "삭제 하시겠습니까?",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 15.sp,
+              color: Color(0xff666666),
+              fontWeight: FontWeight.w400,
+              fontFamily: "Noto Sans KR",
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: 100.sp,
+                  height: 42.sp,
+                  decoration: BoxDecoration(
+                      color: Color(0xffEB9FA3),
+                      borderRadius: BorderRadius.circular(8.sp)),
+                  child: Center(
+                      child: Text(
+                        "취소",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Noto Sans KR",
+                        ),
+                      )),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    data = false;
+                  });
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: 100.sp,
+                  height: 42.sp,
+                  decoration: BoxDecoration(
+                      color: Color(0xffAAAAAA),
+                      borderRadius: BorderRadius.circular(8.sp)),
+                  child: Center(
+                      child: Text(
+                        "확인",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Noto Sans KR",
+                        ),
+                      )),
+                ),
+              ),
+            ],
+          )
+        ],
       ),
-      actionsPadding: EdgeInsets.only(right: 50.sp, bottom: 20),
-      actions: [
-        InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            width: 100.sp,
-            height: 42.sp,
-            decoration: BoxDecoration(
-                color: Color(0xffEB9FA3),
-                borderRadius: BorderRadius.circular(8.sp)),
-            child: Center(
-                child: Text(
-              "취소",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                fontFamily: "Noto Sans KR",
-              ),
-            )),
-          ),
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              data = false;
-            });
-            Navigator.pop(context);
-          },
-          child: Container(
-            width: 100.sp,
-            height: 42.sp,
-            decoration: BoxDecoration(
-                color: Color(0xffAAAAAA),
-                borderRadius: BorderRadius.circular(8.sp)),
-            child: Center(
-                child: Text(
-              "확인",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                fontFamily: "Noto Sans KR",
-              ),
-            )),
-          ),
-        ),
-      ],
     );
 
     // show the dialog
@@ -156,7 +169,7 @@ class _SelectShippingAdressScreenState
                     ),
                     Divider(
                       height: 0,
-                      thickness: 2,
+                      thickness: 1,
                       color: Color(0xffE1E1E1),
                     ),
                   ],
@@ -182,7 +195,7 @@ class _SelectShippingAdressScreenState
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "배송지 목록",
+                                          "Address name",
                                           style: TextStyle(
                                               fontSize: 13.sp,
                                               color: Color(0xff333333),
@@ -193,7 +206,7 @@ class _SelectShippingAdressScreenState
                                           height: 7.sp,
                                         ),
                                         Text(
-                                          "수취인명 | 연락처",
+                                          "Name | 010-5616-4996",
                                           style: TextStyle(
                                               fontSize: 12.sp,
                                               color: Color(0xff666666),
@@ -204,7 +217,18 @@ class _SelectShippingAdressScreenState
                                           height: 7.sp,
                                         ),
                                         Text(
-                                          "(우편번호) 주소",
+                                          "Address",
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: Color(0xff666666),
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: "Noto Sans KR"),
+                                        ),
+                                        SizedBox(
+                                          height: 7.sp,
+                                        ),
+                                        Text(
+                                          "Address detail",
                                           style: TextStyle(
                                               fontSize: 12.sp,
                                               color: Color(0xff666666),
@@ -217,12 +241,12 @@ class _SelectShippingAdressScreenState
                                       ],
                                     ),
                                     SizedBox(
-                                      width: 100.sp,
+                                      width: 50.sp,
                                     ),
                                     Container(
                                       width: 75.sp,
                                       height: 40.sp,
-                                      margin: EdgeInsets.only(bottom: 20.5.sp),
+                                      margin: EdgeInsets.only(bottom: 25.5.sp),
                                       decoration: BoxDecoration(
                                           color: Color(0xffF9F8F8),
                                           border: Border.all(
@@ -247,12 +271,12 @@ class _SelectShippingAdressScreenState
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 13.sp,
+                                      width: MediaQuery.of(context).size.width*0.01
                                     ),
                                     Container(
                                       width: 75.sp,
                                       height: 40.sp,
-                                      margin: EdgeInsets.only(bottom: 20.5.sp),
+                                      margin: EdgeInsets.only(bottom: 25.5.sp),
                                       decoration: BoxDecoration(
                                           color: Color(0xffF9F8F8),
                                           border: Border.all(
@@ -278,7 +302,7 @@ class _SelectShippingAdressScreenState
                               ),
                               Divider(
                                 height: 0,
-                                thickness: 2,
+                                thickness: 1,
                                 color: Color(0xffE1E1E1),
                               ),
                             ],

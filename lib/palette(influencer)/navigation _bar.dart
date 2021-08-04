@@ -33,7 +33,6 @@ class _NavigationBarState extends State<NavigationBar> {
       child: Scaffold(
         // backgroundColor: Colors.white,
         bottomNavigationBar: Container(
-          height: 70,
           decoration: BoxDecoration(
             color: Colors.black87,
             borderRadius: BorderRadius.only(

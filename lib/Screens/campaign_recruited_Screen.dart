@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:palette/Screens/registering_campaign_Screen.dart';
 
 import 'applicants_Screen.dart';
 
@@ -32,47 +33,129 @@ class _CampaignRecruitedScreenState extends State<CampaignRecruitedScreen> {
           ),
         ),
       ),
-      content: Container(
-        height: 50,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            InkWell(
-              onTap: (){
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                "수정하기",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xff666666),
-                  fontWeight: FontWeight.w300,
-                  fontFamily: "Noto Sans KR",
-                ),
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => RegisteringcampaignScreen(
+                        change: true,
+                      )));
+            },
+            child: Text(
+              "수정하기                    ",
+              style: TextStyle(
+                fontSize: 15,
+                color: Color(0xff666666),
+                fontWeight: FontWeight.w300,
+                fontFamily: "Noto Sans KR",
               ),
             ),
-            Divider(
-              thickness: 1,
+          ),
+          Divider(
+            thickness: 1,
+          ),
+          InkWell(
+            onTap: () {
+              showAlertDialog1(context);
+            },
+            child: Text(
+              "삭제하기                    ",
+              style: TextStyle(
+                fontSize: 15,
+                color: Color(0xff666666),
+                fontWeight: FontWeight.w300,
+                fontFamily: "Noto Sans KR",
+              ),
             ),
-            InkWell(
-              onTap: (){
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                "삭제하기",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xff666666),
-                  fontWeight: FontWeight.w300,
-                  fontFamily: "Noto Sans KR",
+          )
+        ],
+      ),
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showAlertDialog1(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "정말로 삭제하시겠습니까?",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 15,
+              color: Color(0xff666666),
+              fontWeight: FontWeight.w400,
+              fontFamily: "Noto Sans KR",
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: 100,
+                  height: 42,
+                  decoration: BoxDecoration(
+                      color: Color(0xffEB9FA3),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                      child: Text(
+                    "네",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Noto Sans KR",
+                    ),
+                  )),
                 ),
               ),
-            )
-          ],
-        ),
+              SizedBox(
+                width: 10,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: 100,
+                  height: 42,
+                  decoration: BoxDecoration(
+                      color: Color(0xffAAAAAA),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                      child: Text(
+                    "아니오",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Noto Sans KR",
+                    ),
+                  )),
+                ),
+              ),
+            ],
+          )
+        ],
       ),
     );
 
@@ -160,8 +243,9 @@ class _CampaignRecruitedScreenState extends State<CampaignRecruitedScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                width: 50,
-                                height: 22,
+                                width: MediaQuery.of(context).size.width * 0.1,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.03,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(3),
                                   border: Border.all(
@@ -180,8 +264,8 @@ class _CampaignRecruitedScreenState extends State<CampaignRecruitedScreen> {
                                 )),
                             SizedBox(width: 5),
                             Container(
-                              width: 50,
-                              height: 22,
+                              width: MediaQuery.of(context).size.width * 0.1,
+                              height: MediaQuery.of(context).size.height * 0.03,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(3),
                                 border: Border.all(
@@ -215,81 +299,81 @@ class _CampaignRecruitedScreenState extends State<CampaignRecruitedScreen> {
                               children: [
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "캠페인 신청기간",
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Color(0xff000000),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.bold)),
-                                      TextSpan(
-                                          text: "    01.04 ~ 01.10",
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Color(0xff000000),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w300))
-                                    ])),
+                                  TextSpan(
+                                      text: "캠페인 신청기간",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Color(0xff000000),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                      text: "    01.04 ~ 01.10",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Color(0xff000000),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w300))
+                                ])),
                                 SizedBox(
                                   height: 4,
                                 ),
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "인플루언서 발표",
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w500)),
-                                      TextSpan(
-                                          text: "    01.11",
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w300))
-                                    ])),
+                                  TextSpan(
+                                      text: "인플루언서 발표",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w500)),
+                                  TextSpan(
+                                      text: "    01.11",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w300))
+                                ])),
                                 SizedBox(
                                   height: 4,
                                 ),
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "캠페인 이용기간",
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w500)),
-                                      TextSpan(
-                                          text: "    01.11 ~ 01.25",
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w300))
-                                    ])),
+                                  TextSpan(
+                                      text: "캠페인 이용기간",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w500)),
+                                  TextSpan(
+                                      text: "    01.11 ~ 01.25",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w300))
+                                ])),
                                 SizedBox(
                                   height: 4,
                                 ),
                                 RichText(
                                     text: TextSpan(children: <TextSpan>[
-                                      TextSpan(
-                                          text: "콘텐츠 등록기간",
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w500)),
-                                      TextSpan(
-                                          text: "    01.25 ~ 02.07",
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Color(0xff666666),
-                                              fontFamily: "Noto Sans KR",
-                                              fontWeight: FontWeight.w300))
-                                    ])),
+                                  TextSpan(
+                                      text: "콘텐츠 등록기간",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w500)),
+                                  TextSpan(
+                                      text: "    01.25 ~ 02.07",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Color(0xff666666),
+                                          fontFamily: "Noto Sans KR",
+                                          fontWeight: FontWeight.w300))
+                                ])),
                               ],
                             ),
                             Container(
@@ -487,7 +571,7 @@ class _CampaignRecruitedScreenState extends State<CampaignRecruitedScreen> {
                         ),
                         Divider(
                           height: 50,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         // box 3
@@ -567,7 +651,7 @@ class _CampaignRecruitedScreenState extends State<CampaignRecruitedScreen> {
                         ),
                         Divider(
                           height: 50,
-                          thickness: 2,
+                          thickness: 1,
                         ),
 
                         // box 4
@@ -616,16 +700,14 @@ class _CampaignRecruitedScreenState extends State<CampaignRecruitedScreen> {
                         SizedBox(
                           height: 10,
                         )
-
                       ]),
                 ),
               ),
               InkWell(
-                onTap: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
-                        return ApplicantsScreen();
-                      }));
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ApplicantsScreen();
+                  }));
                 },
                 child: Container(
                   height: 50,

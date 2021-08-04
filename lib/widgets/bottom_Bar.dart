@@ -108,7 +108,7 @@ class _UserHomeState extends State<UserHome> {
             index: selectedTab,
             children: [
               MainScreen(),
-              RegisteringcampaignScreen(),
+              RegisteringcampaignScreen(change: false,),
               NotificationScreen(),
               ProfileScreen()
               // ExploreScreen(),

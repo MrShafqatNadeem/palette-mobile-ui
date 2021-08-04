@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:palette/widgets/custom_text.dart';
 import 'package:palette/widgets/custom_textfield.dart';
+import 'package:palette/widgets/floatingbutton.dart';
 
 import 'navigation _bar.dart';
 
 class ChangingInformationScreen extends StatefulWidget {
   @override
-  _ChangingInformationScreenState createState() => _ChangingInformationScreenState();
+  _ChangingInformationScreenState createState() =>
+      _ChangingInformationScreenState();
 }
 
 class _ChangingInformationScreenState extends State<ChangingInformationScreen> {
@@ -48,14 +50,14 @@ class _ChangingInformationScreenState extends State<ChangingInformationScreen> {
                 borderRadius: BorderRadius.circular(8.sp)),
             child: Center(
                 child: Text(
-                  "취소",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Noto Sans KR",
-                  ),
-                )),
+              "취소",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                fontFamily: "Noto Sans KR",
+              ),
+            )),
           ),
         ),
         InkWell(
@@ -70,14 +72,14 @@ class _ChangingInformationScreenState extends State<ChangingInformationScreen> {
                 borderRadius: BorderRadius.circular(8.sp)),
             child: Center(
                 child: Text(
-                  "탈퇴",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Noto Sans KR",
-                  ),
-                )),
+              "탈퇴",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                fontFamily: "Noto Sans KR",
+              ),
+            )),
           ),
         ),
       ],
@@ -91,6 +93,7 @@ class _ChangingInformationScreenState extends State<ChangingInformationScreen> {
       },
     );
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -173,15 +176,15 @@ class _ChangingInformationScreenState extends State<ChangingInformationScreen> {
                           padding: const EdgeInsets.all(1.0),
                           child: blogheckbox
                               ? Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )
                               : Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )),
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )),
                     ),
                   ),
                   SizedBox(
@@ -222,21 +225,23 @@ class _ChangingInformationScreenState extends State<ChangingInformationScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: instagramheckbox ? Color(0xff333333) : Colors.white,
+                          color: instagramheckbox
+                              ? Color(0xff333333)
+                              : Colors.white,
                           border: Border.all(color: Color(0xffE1E1E1))),
                       child: Padding(
                           padding: const EdgeInsets.all(1.0),
                           child: instagramheckbox
                               ? Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )
                               : Icon(
-                            Icons.check,
-                            size: 18.0,
-                            color: Colors.white,
-                          )),
+                                  Icons.check,
+                                  size: 18.0,
+                                  color: Colors.white,
+                                )),
                     ),
                   ),
                   SizedBox(
@@ -297,71 +302,57 @@ class _ChangingInformationScreenState extends State<ChangingInformationScreen> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 140.sp
-              ),
+              SizedBox(height: 80.sp),
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     showAlertDialog(context);
                   },
                   child: Text(
                     "탈퇴하기",
                     style: TextStyle(
-                        fontSize: 14.sp,
-                        fontFamily: "Noto Sans KR",
-                        color: Color(0xff757575),
-                        fontWeight: FontWeight.w400,
-                      decoration: TextDecoration.underline,),
+                      fontSize: 14.sp,
+                      fontFamily: "Noto Sans KR",
+                      color: Color(0xff757575),
+                      fontWeight: FontWeight.w400,
+                      decoration: TextDecoration.underline,
+                    ),
                     textAlign: TextAlign.start,
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 21.sp,
-              ),
-              InkWell(
-                onTap: () {
-                  // if (checkbox2 && checkbox3) {
-                  if (nickname == '') {
-                    name.requestFocus();
-                  }  else if (blog == '') {
-                    blogf.requestFocus();
-                  }
-                  else if (instagram == '') {
-                    instagramf.requestFocus();
-                  }
-                  else {
-                    Navigator.pop(context);
-                  }
-                  //  }
-                  //
-                  //   else {
-                  //     setState(() {
-                  //       message = "서비스 및 개인정보 이용약관에 동의하세요";
-                  //       showAlertDialog(context);
-                  //     });
-                  //   }
-                },
-                child: Container(
-                  height: 52.sp,
-                  decoration: BoxDecoration(
-                      color: Color(0xffEA9FA3),
-                      borderRadius: BorderRadius.all(Radius.circular(3))),
-                  child: Center(
-                      child: Text("가입완료",
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Color(0xffFFFFFF),
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Noto Sans KR"))),
                 ),
               ),
             ],
           ),
         ),
       ),
+
+      floatingActionButton: InkWell(
+          onTap: () {
+            // if (checkbox2 && checkbox3) {
+            if (nickname == '') {
+              name.requestFocus();
+            } else if (blog == '') {
+              blogf.requestFocus();
+            } else if (instagram == '') {
+              instagramf.requestFocus();
+            } else {
+              Navigator.pop(context);
+            }
+            //  }
+            //
+            //   else {
+            //     setState(() {
+            //       message = "서비스 및 개인정보 이용약관에 동의하세요";
+            //       showAlertDialog(context);
+            //     });
+            //   }
+          },
+          child: FloatingButton(text: "인증 하기",)
+      ),
+
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
